@@ -1,30 +1,36 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <button @click="newsWrite"> {{isActive?'-':'+'}}</button>
+    <NewsWrite :isActive="isActive" @close="newsWrite" />
   </nav>
   <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import NewsWrite from './components/NewsWrite.vue'
+  export default {
+    components: { NewsWrite },
+    data(){
+      return{ isActive:false }
+    },
+    methods: {
+      newsWrite(){
+        this.isActive = !this.isActive;
+      }
+    },
+  }
+</script>
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<style lang="scss" scoped>
+  nav{
+    button{
+      width:60px; height:60px;
+      font-size:2rem;
+      border-radius: 100%;
+      background: yellow;
+      border:1px solid #000;
+      right:30px; top:30px;
+      position:fixed;      
     }
   }
-}
 </style>
