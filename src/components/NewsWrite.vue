@@ -23,7 +23,7 @@ export default {
     submitHanduler(){
       let today = new Date();
       today = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
-      this.createUser({id:Date.now(),name:this.userName, content:this.newsContent, date:today});
+      this.createUser({name:this.userName, content:this.newsContent, date:today});
       
       this.userName='';
       this.newsContent='';

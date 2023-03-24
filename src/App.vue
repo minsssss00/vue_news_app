@@ -27,7 +27,7 @@
       width:60px; height:60px;
       font-size:2rem;
       border-radius: 100%;
-      background: yellow;
+      background: #e6e1ff;
       border:1px solid #000;
       right:30px; top:30px;
       position:fixed;      

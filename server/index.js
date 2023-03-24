@@ -8,20 +8,33 @@ const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
+const executeQuery = require('./db.js')
+
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', async (req, res) => {
-    res.send('hello')
+    const data = await executeQuery("select * from news", [])
+    res.json(data)
 })
 
 app.post('/', async (req, res) => {
-    res.send('hello')
+    const name = req.body.name, 
+            content = req.body.content, 
+            date = req.body.date
+    const data = await executeQuery("insert into news (name, content, date) values (?,?,?)", [name, content, date]);
+
+    const result = await executeQuery("select * from news", []);
+    
+    res.json(result)
 })
 
-app.delete('/', async (req, res) => {
-    res.send('hello')
+app.delete('/:id', async (req, res) => {
+    const id = req.params.id
+    const data = await executeQuery("delete from news where id=?", [id]);
+    const result = await executeQuery("select * from news", []);
+    res.json(result)
 })
 
 app.listen(4000, ()=>{

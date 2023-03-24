@@ -6,14 +6,14 @@
       <li v-for="v in data" :key="v.id">
         <p>{{v.date}}</p>
         <p>{{v.content}}</p>
-        <button @click="add">X</button>
+        <button @click="close(v.id)">X</button>
       </li>
     </ul>
   </article>
 </template>
 
 <script>
-import {mapState,mapGetters} from 'vuex';
+import {mapState,mapGetters,mapActions} from 'vuex';
 
 export default {
   name: 'NewsList',
@@ -22,10 +22,14 @@ export default {
     ...mapGetters(['allUserNumber'])
   },
   methods:{
-    
-    
-   
-  }
+    ...mapActions(['getData','deleteUser']),
+    close(id){
+      this.deleteUser(id);
+    }
+  },
+  created(){
+    this.getData()
+  },
 }
 </script>
 
@@ -39,7 +43,7 @@ h2 span{font-size:1rem;}
       flex-wrap: wrap;
       li{
         width:20%;
-        background: yellow;
+        background:radial-gradient(circle, rgba(238, 174, 202, 0.611) 0%, rgba(192, 221, 255, 0.557) 100%);
         padding:30px;
         position: relative;
         margin:5%;
